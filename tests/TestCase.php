@@ -2,9 +2,9 @@
 
 namespace Appslanka\LaravelBugFix\Tests;
 
+use Appslanka\LaravelBugFix\LaravelBugFixServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Appslanka\LaravelBugFix\LaravelBugFixServiceProvider;
 
 class TestCase extends Orchestra
 {
