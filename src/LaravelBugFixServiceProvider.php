@@ -2,9 +2,9 @@
 
 namespace Appslanka\LaravelBugFix;
 
+use Appslanka\LaravelBugFix\Commands\LaravelBugFixCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Appslanka\LaravelBugFix\Commands\LaravelBugFixCommand;
 
 class LaravelBugFixServiceProvider extends PackageServiceProvider
 {

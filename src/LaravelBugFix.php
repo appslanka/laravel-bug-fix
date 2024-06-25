@@ -2,6 +2,4 @@
 
 namespace Appslanka\LaravelBugFix;
 
-class LaravelBugFix
-{
-}
+class LaravelBugFix {}
