@@ -2,10 +2,9 @@
 
 namespace Appslanka\LaravelBugFix;
 
-use Exception;
-use Throwable;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Http;
+use Throwable;
 
 class LaravelBugFix extends ExceptionHandler
 {
