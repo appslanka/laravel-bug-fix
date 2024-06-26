@@ -4,11 +4,10 @@ namespace Appslanka\LaravelBugFix;
 
 use Exception;
 use Illuminate\Contracts\Debug\ExceptionHandler;
-use Illuminate\Foundation\Exceptions\Handler;
 use Illuminate\Support\Facades\Http;
 
-class LaravelBugFix extends ExceptionHandler{
-
+class LaravelBugFix extends ExceptionHandler
+{
     protected $config;
 
     public function __construct($app, $config)
