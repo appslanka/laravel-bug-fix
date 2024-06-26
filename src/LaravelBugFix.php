@@ -28,9 +28,10 @@ class LaravelBugFix extends ExceptionHandler
         ];
 
         Http::withHeaders([
-            'Authorization' => 'Bearer '.$this->config['api_key'],
+            'Authorization' => 'Bearer '. $this->config['api_key'],
         ])->post($this->config['api_url'], $payload);
 
+        info("Calling Laravel bug fix reporting >>>");
         // Call the parent report method to ensure other reporting is done
         parent::report($e);
     }
