@@ -17,9 +17,17 @@ class LaravelBugFixServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('laravel-bug-fix')
-            ->hasConfigFile()
+            ->hasConfigFile('bug-fix')
             ->hasViews()
             ->hasMigration('create_laravel-bug-fix_table')
             ->hasCommand(LaravelBugFixCommand::class);
+    }
+
+    
+    public function registeringPackage()
+    {
+        $this->app->singleton(LaravelBugFix::class, function ($app) {
+            return new LaravelBugFix($app['config']['bug-fix']);
+        });
     }
 }
