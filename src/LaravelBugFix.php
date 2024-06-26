@@ -30,6 +30,7 @@ class LaravelBugFix  extends ExceptionHandler{
             'Authorization' => 'Bearer '.$this->config['api_key'],
         ])->post($this->config['api_url'], $payload);
 
+        
         // Call the parent report method to ensure other reporting is done
         parent::report($exception);
     }
