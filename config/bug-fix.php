@@ -5,6 +5,12 @@
  */
 return [
     /**
+     * Flag indicating whether reporting is enabled.
+     * Set to true to activate reporting; false to deactivate.
+     */
+    'enabled' => env('LBF', true),
+
+    /**
      * API endpoint URL where error reports will be sent.
      * Defaults to 'https://laravelbugfix.com/api/reports' if not provided in environment.
      */

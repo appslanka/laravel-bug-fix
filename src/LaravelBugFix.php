@@ -21,6 +21,10 @@ class LaravelBugFix extends ExceptionHandler
 
     public function report(Throwable $e)
     {
+        if (!$this->config['enabled']) {
+            return parent::report($e);
+        }
+
         // Custom reporting logic
         $payload = [
             'message' => $e->getMessage(),
