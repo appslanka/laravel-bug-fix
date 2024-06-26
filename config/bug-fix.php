@@ -23,10 +23,16 @@ return [
     'include_request_details' => true,
 
     /**
-     * Flag indicating whether to include server environment details in error reports.
+     * Flag indicating whether to include cookies details in error reports.
      * Set to true to include server details; false to exclude.
      */
-    'include_server_details' => true,
+    'include_cookies' => false,
+
+     /**
+     * Flag indicating whether to include sessions details in error reports.
+     * Set to true to include server details; false to exclude.
+     */
+    'include_sessions' => false,
 
     /**
      * Field name used to identify the authenticated user in error reports.

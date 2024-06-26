@@ -2,11 +2,12 @@
 
 namespace Appslanka\LaravelBugFix;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Throwable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Request;
-use Throwable;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class LaravelBugFix extends ExceptionHandler
 {
@@ -35,20 +36,25 @@ class LaravelBugFix extends ExceptionHandler
                 'url' => request()->fullUrl(),
                 'method' => request()->method(),
                 'headers' => request()->headers->all(),
-                'input' => $this->maskSensitiveFields(request()->all()),
+                'parameters' => $this->maskSensitiveFields(request()->all()),
                 'user_agent' => request()->header('User-Agent'),
                 'ip' => request()->ip(),
+                'php_version' => phpversion(),
+                
             ];
         }
 
-        // Include server details if enabled in configuration
-        if ($this->config['include_server_details']) {
+        // Include cookies details if enabled in configuration
+        if ($this->config['include_cookies']) {
             $payload += [
-                'php_version' => phpversion(),
-                'server_params' => $_SERVER,
-                'get_params' => $_GET,
-                'post_params' => $_POST,
-                'cookies' => $_COOKIE,
+               'cookies' => $_COOKIE,
+            ];
+        }
+
+         // Include session details if enabled in configuration
+         if ($this->config['include_sessions']) {
+            $payload += [
+               'sessions' => Request::hasSession() ? Session::all() : [],
             ];
         }
 
@@ -75,8 +81,6 @@ class LaravelBugFix extends ExceptionHandler
             'Authorization' => 'Bearer '.$this->config['api_key'],
         ])->post($this->config['api_url'], $payload);
 
-        info('Calling Laravel bug fix reporting >>>');
-        // Call the parent report method to ensure other reporting is done
         parent::report($e);
     }
 
