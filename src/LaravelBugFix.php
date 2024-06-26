@@ -4,11 +4,9 @@ namespace Appslanka\LaravelBugFix;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Facades\Http;
-use Throwable;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
+use Throwable;
 
 class LaravelBugFix extends ExceptionHandler
 {
@@ -46,7 +44,7 @@ class LaravelBugFix extends ExceptionHandler
         ];
 
         Http::withHeaders([
-            'Authorization' => 'Bearer ' . $this->config['api_key'],
+            'Authorization' => 'Bearer '.$this->config['api_key'],
         ])->post($this->config['api_url'], $payload);
 
         info('Calling Laravel bug fix reporting >>>');
