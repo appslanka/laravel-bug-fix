@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Foundation\Exceptions\Handler;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 
-class LaravelBugFix extends Handler implements ExceptionHandler{
+class LaravelBugFix extends ExceptionHandler{
 
     protected $config;
 
