@@ -28,10 +28,10 @@ class LaravelBugFixServiceProvider extends PackageServiceProvider
     public function registeringPackage()
     {
         $this->app->singleton(LaravelBugFix::class, function ($app) {
-            return new LaravelBugFix($app['config']['bug-fix']);
+            return new LaravelBugFix($app, $app['config']['bug-fix']);
         });
 
-        // Bind the custom exception handler
-        $this->app->singleton(ExceptionHandlerContract::class, LaravelBugFixCommand::class);
+        // Bind the custom exception handler to the exception handler contract
+        $this->app->singleton(ExceptionHandlerContract::class, LaravelBugFix::class);
     }
 }
