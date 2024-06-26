@@ -5,14 +5,14 @@ namespace Appslanka\LaravelBugFix;
 use Exception;
 use Illuminate\Support\Facades\Http;
 
-class LaravelBugFix {
+class LaravelBugFix
+{
     protected $config;
 
     public function __construct($config)
     {
         $this->config = $config;
     }
-
 
     public function report(Exception $exception)
     {
@@ -24,7 +24,7 @@ class LaravelBugFix {
         ];
 
         Http::withHeaders([
-            'Authorization' => 'Bearer ' . $this->config['api_key'],
+            'Authorization' => 'Bearer '.$this->config['api_key'],
         ])->post($this->config['api_url'], $payload);
     }
 }
