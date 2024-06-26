@@ -23,7 +23,7 @@ class LaravelBugFix extends ExceptionHandler
     public function report(Throwable $e)
     {
         if (! $this->shouldReport($e) || ! $this->config['enabled']) {
-            info('LBF NOT reporting >>> '. now());
+            info('LBF NOT reporting >>> '.now());
 
             return parent::report($e);
         }
@@ -97,8 +97,8 @@ class LaravelBugFix extends ExceptionHandler
         Http::withHeaders([
             'Authorization' => 'Bearer '.$this->config['api_key'],
         ])
-        ->timeout(10)
-        ->post($this->config['api_url'], $payload);
+            ->timeout(10)
+            ->post($this->config['api_url'], $payload);
 
         parent::report($e);
     }
