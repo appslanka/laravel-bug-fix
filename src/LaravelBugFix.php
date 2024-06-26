@@ -22,12 +22,12 @@ class LaravelBugFix extends ExceptionHandler
     public function report(Throwable $e)
     {
         if (! $this->shouldReport($e) || ! $this->config['enabled']) {
-            info('LBF not reporting >>>');
+            info('LBF NOT reporting >>> '. now());
 
             return parent::report($e);
         }
 
-        info('LBF not reporting >>> '.now());
+        info('LBF reporting >>> '.now());
         $payload = [
             'message' => $e->getMessage(),
             'file' => $e->getFile(),
@@ -85,7 +85,9 @@ class LaravelBugFix extends ExceptionHandler
 
         Http::withHeaders([
             'Authorization' => 'Bearer '.$this->config['api_key'],
-        ])->post($this->config['api_url'], $payload);
+        ])
+        ->timeout(10)
+        ->post($this->config['api_url'], $payload);
 
         parent::report($e);
     }
