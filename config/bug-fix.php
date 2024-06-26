@@ -8,7 +8,7 @@ return [
      * Flag indicating whether reporting is enabled.
      * Set to true to activate reporting; false to deactivate.
      */
-    'enabled' => env('LBF', true),
+    'enabled' => env('LBF_ENABLED', true),
 
     /**
      * API endpoint URL where error reports will be sent.
