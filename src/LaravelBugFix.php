@@ -47,6 +47,7 @@ class LaravelBugFix extends ExceptionHandler
             'line' => $e->getLine(),
             'trace' => $e->getTraceAsString(),
             'code' => $e->getCode(),
+            'error_key' => $errorKey,
         ];
 
         // Include request details if enabled in configuration
