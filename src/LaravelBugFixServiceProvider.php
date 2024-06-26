@@ -3,9 +3,9 @@
 namespace Appslanka\LaravelBugFix;
 
 use Appslanka\LaravelBugFix\Commands\LaravelBugFixCommand;
+use Illuminate\Contracts\Debug\ExceptionHandler as ExceptionHandlerContract;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Illuminate\Contracts\Debug\ExceptionHandler as ExceptionHandlerContract;
 
 class LaravelBugFixServiceProvider extends PackageServiceProvider
 {
@@ -24,7 +24,6 @@ class LaravelBugFixServiceProvider extends PackageServiceProvider
             ->hasCommand(LaravelBugFixCommand::class);
     }
 
-    
     public function registeringPackage()
     {
         $this->app->singleton(LaravelBugFix::class, function ($app) {

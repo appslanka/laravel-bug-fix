@@ -17,7 +17,6 @@ class LaravelBugFix extends Handler implements ExceptionHandler{
         $this->config = $config;
     }
 
-
     public function report(Exception $exception)
     {
         // Custom reporting logic
@@ -29,7 +28,7 @@ class LaravelBugFix extends Handler implements ExceptionHandler{
         ];
 
         Http::withHeaders([
-            'Authorization' => 'Bearer ' . $this->config['api_key'],
+            'Authorization' => 'Bearer '.$this->config['api_key'],
         ])->post($this->config['api_url'], $payload);
 
         // Call the parent report method to ensure other reporting is done
