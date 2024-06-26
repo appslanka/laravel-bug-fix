@@ -22,8 +22,11 @@ class LaravelBugFix extends ExceptionHandler
     public function report(Throwable $e)
     {
         if (! $this->shouldReport($e) || ! $this->config['enabled']) {
+            info("LBF not reporting >>>");
             return parent::report($e);
         }
+
+        info("LBF not reporting >>> " . now());
         $payload = [
             'message' => $e->getMessage(),
             'file' => $e->getFile(),
