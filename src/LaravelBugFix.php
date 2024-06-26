@@ -2,12 +2,13 @@
 
 namespace Appslanka\LaravelBugFix;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Throwable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
-use Throwable;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class LaravelBugFix extends ExceptionHandler
 {
@@ -27,7 +28,17 @@ class LaravelBugFix extends ExceptionHandler
             return parent::report($e);
         }
 
+        // Generate a unique key for this error report
+        $errorKey = md5($e->getMessage() . $e->getFile() . $e->getLine());
+        if (Cache::has($errorKey)) {
+            return;
+        }
+
+        // Cache this error with a timeout period (e.g., 1 hour)
+        Cache::put($errorKey, true, now()->addMinutes(5));
+        
         info('LBF reporting >>> '.now());
+        
         $payload = [
             'message' => $e->getMessage(),
             'file' => $e->getFile(),
