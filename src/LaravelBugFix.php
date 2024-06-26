@@ -2,12 +2,12 @@
 
 namespace Appslanka\LaravelBugFix;
 
-use Throwable;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Throwable;
 
 class LaravelBugFix extends ExceptionHandler
 {
@@ -40,21 +40,21 @@ class LaravelBugFix extends ExceptionHandler
                 'user_agent' => request()->header('User-Agent'),
                 'ip' => request()->ip(),
                 'php_version' => phpversion(),
-                
+
             ];
         }
 
         // Include cookies details if enabled in configuration
         if ($this->config['include_cookies']) {
             $payload += [
-               'cookies' => $_COOKIE,
+                'cookies' => $_COOKIE,
             ];
         }
 
-         // Include session details if enabled in configuration
-         if ($this->config['include_sessions']) {
+        // Include session details if enabled in configuration
+        if ($this->config['include_sessions']) {
             $payload += [
-               'sessions' => Request::hasSession() ? Session::all() : [],
+                'sessions' => Request::hasSession() ? Session::all() : [],
             ];
         }
 

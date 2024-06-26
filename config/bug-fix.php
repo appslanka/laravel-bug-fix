@@ -28,7 +28,7 @@ return [
      */
     'include_cookies' => false,
 
-     /**
+    /**
      * Flag indicating whether to include sessions details in error reports.
      * Set to true to include server details; false to exclude.
      */
