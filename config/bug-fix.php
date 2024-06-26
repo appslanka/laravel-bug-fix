@@ -8,7 +8,7 @@ return [
     'include_server_details' => true,
     'exception_user_identifier_field' => 'user_id', // Default identifier field
     'masked_fields' => [
-       'password',
+        'password',
         'credit_card_number',
         'social_security_number',
         'email',
@@ -20,7 +20,7 @@ return [
         'auth',
         'verification',
         'credit_card',
-        'cardToken', 
+        'cardToken',
         'cvv',
         'iban',
         'name',
