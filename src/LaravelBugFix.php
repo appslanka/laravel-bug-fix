@@ -2,14 +2,11 @@
 
 namespace Appslanka\LaravelBugFix;
 
-use Throwable;
-use Illuminate\Support\Facades\App;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Throwable;
 
 class LaravelBugFix extends ExceptionHandler
 {
@@ -65,11 +62,11 @@ class LaravelBugFix extends ExceptionHandler
             $userDetails = collect([
                 $identifierField => $user->{$identifierField},
                 'name' => $user->name,
-                'email' => $user->email
+                'email' => $user->email,
             ])->filter()->all(); // Remove null values
 
             // Add user details to payload if not empty
-            if (!empty($userDetails)) {
+            if (! empty($userDetails)) {
                 $payload['user'] = $userDetails;
             }
         }
