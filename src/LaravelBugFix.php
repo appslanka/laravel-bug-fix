@@ -32,6 +32,7 @@ class LaravelBugFix extends ExceptionHandler
         $errorKey = md5($e->getMessage().$e->getFile().$e->getLine());
         if (Cache::has($errorKey)) {
             info('LBF NOT reporting because cached key >>> '.now());
+
             return;
         }
 
