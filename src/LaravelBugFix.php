@@ -3,8 +3,9 @@
 namespace Appslanka\LaravelBugFix;
 
 use Exception;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Throwable;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class LaravelBugFix extends ExceptionHandler
 {
@@ -16,14 +17,14 @@ class LaravelBugFix extends ExceptionHandler
         $this->config = $config;
     }
 
-    public function report(Exception $exception)
+    public function report(Throwable $e)
     {
         // Custom reporting logic
         $payload = [
-            'message' => $exception->getMessage(),
-            'file' => $exception->getFile(),
-            'line' => $exception->getLine(),
-            'trace' => $exception->getTraceAsString(),
+            'message' => $e->getMessage(),
+            'file' => $e->getFile(),
+            'line' => $e->getLine(),
+            'trace' => $e->getTraceAsString(),
         ];
 
         Http::withHeaders([
@@ -31,6 +32,6 @@ class LaravelBugFix extends ExceptionHandler
         ])->post($this->config['api_url'], $payload);
 
         // Call the parent report method to ensure other reporting is done
-        parent::report($exception);
+        parent::report($e);
     }
 }
