@@ -21,7 +21,7 @@ class LaravelBugFix extends ExceptionHandler
 
     public function report(Throwable $e)
     {
-        if (!$this->config['enabled']) {
+        if (!$this->shouldReport($e) || !$this->config['enabled']) {
             return parent::report($e);
         }
 
