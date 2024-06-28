@@ -68,5 +68,6 @@ return [
         'iban',
         'name',
         'email',
+        '_token'
     ],
 ];
