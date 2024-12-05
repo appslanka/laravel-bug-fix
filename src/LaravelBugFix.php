@@ -23,23 +23,21 @@ class LaravelBugFix extends ExceptionHandler
     public function report(Throwable $e)
     {
         if (! $this->shouldReport($e) || ! $this->config['enabled']) {
-            info('LBF NOT reporting >>> '.now());
-
+            // info('LBF NOT reporting >>> '.now());
             return parent::report($e);
         }
 
         // Generate a unique key for this error report
         $errorKey = md5($e->getMessage().$e->getFile().$e->getLine());
         if (Cache::has($errorKey)) {
-            info('LBF NOT reporting because cached key >>> '.now());
-
+            // info('LBF NOT reporting because cached key >>> '.now());
             return parent::report($e);
         }
 
         // Cache this error with a timeout period (e.g., 1 hour)
         Cache::put($errorKey, true, now()->addMinutes(5));
 
-        info('LBF reporting >>> '.now());
+        // info('LBF reporting >>> '.now());
 
         $payload = [
             'message' => $e->getMessage(),
